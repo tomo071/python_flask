@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8"/>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filrname='style.css')}}"
+    />
+  </head>
+
+  <body>
+    <h2>問い合わせフォーム</h2>
+    <form
+      action="{{url_for(contact_complete)}}"
+      method="POST"
+      novalidate="novalidate"
+    >
+      <table>
+        <tr>
+          <tb>ユーザー名</tb>
+          <tb>
+            <input
+              type="text"
+              name="email"
+              value="{{username}}"
+              placeholder="ユーザー名"
+            />
+          </tb>
+        </tr>
+        <tr>
+          <tb>問い合わせ内容</tb>
+          <tb>
+            <textarea name="description" placeholder="問い合わせ内容">
+              {{description}}
+            </textarea>
+          </tb>
+        </tr>
+      </table>
+      <input type="submit" value="問い合わせ"/>
+    </form>
+  </body>
+</html>
