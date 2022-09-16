@@ -18,9 +18,9 @@ def show_name(name):
 def contact():
   return render_template("contact.html")
 
-@app.eoute("/contact/complete",methods=["get","post"])
+@app.route("/contact/complete",methods=["get","post"])
 def contact_complete():
-  if request.method == "post":
+  if request.method == "POST":
 
     return redirect(url_for("contact_complete"))
 
