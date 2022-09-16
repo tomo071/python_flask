@@ -22,6 +22,10 @@ def contact():
 def contact_complete():
   if request.method == "POST":
 
+    username = request.form["username"]
+    email = request.form["email"]
+    description = request.form["description"]
+    
     return redirect(url_for("contact_complete"))
 
   return render_template("contact_complete.html")
