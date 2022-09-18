@@ -1,4 +1,4 @@
-form email_validator import validate_email, EmailNotValidError
+from email_validator import validate_email, EmailNotValidError
 
 from flask import (
   Flask, 
@@ -50,8 +50,8 @@ def contact_complete():
 with app.test_request_context():
   print(url_for("index"))
   print(url_for("hello-endpoint", name="world"))
-  print(url_for("show_name", name="tomo", page="1"))
+  print(url_for("show_name", name="name", page="1"))
 
-with app.test_request_context("/uesrs?updated=true"):
+with app.test_request_context("/users?updated=true"):
   print(request.args.get("updated"))
 
