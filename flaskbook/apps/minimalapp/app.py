@@ -11,6 +11,10 @@ from flask import (
   flash,
 )
 
+import logging
+
+app.logger.setLevel(logging.DEBUG)
+
 app=Flask(__name__)
 
 @app.route("/")
