@@ -15,7 +15,13 @@ import logging
 
 app.logger.setLevel(logging.DEBUG)
 
+from flask_debugtoolbar import DebugToolbarExtension
+
 app=Flask(__name__)
+
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+
+toolbar = DebugToolbarExtension(app)
 
 @app.route("/")
 def index():
