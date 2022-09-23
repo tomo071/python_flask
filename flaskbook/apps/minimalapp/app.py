@@ -13,13 +13,15 @@ from flask import (
 
 import logging
 
-app.logger.setLevel(logging.DEBUG)
-
 from flask_debugtoolbar import DebugToolbarExtension
 
 app=Flask(__name__)
 
+app.config["SECRET_KEY"]="2AZSMss3p5QPbcY2hBsJ"
+
 app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+
+app.logger.setLevel(logging.DEBUG)
 
 toolbar = DebugToolbarExtension(app)
 
