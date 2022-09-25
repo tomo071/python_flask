@@ -1,13 +1,13 @@
 from email_validator import validate_email, EmailNotValidError
 
 from flask import (
-  Flask, 
-  render_template, 
+  Flask,  
   current_app, 
   g, 
+  redirect,
+  render_template,
   request, 
   url_for, 
-  redirect,
   flash,
 )
 
@@ -41,7 +41,7 @@ def show_name(name):
 def contact():
   return render_template("contact.html")
 
-@app.route("/contact/complete",methods=["get","post"])
+@app.route("/contact/complete",methods=["GET","POST"])
 def contact_complete():
   if request.method == "POST":
 
