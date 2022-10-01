@@ -1,3 +1,4 @@
+from email.message import Message
 from email_validator import validate_email, EmailNotValidError
 
 from flask import (
@@ -16,7 +17,7 @@ import os
 
 from flask_debugtoolbar import DebugToolbarExtension
 
-from flask_mail import Mail
+from flask_mail import Mail,Message
 app=Flask(__name__)
 
 app.config["MAIL_SERVER"] = os.environ.get("MAIL_SERVER")
@@ -54,6 +55,14 @@ def contact():
 def contact_complete():
   if request.method == "POST":
 
+    send_email(
+      email,
+      "問い合わせありがとうございました",
+      "contact_mail"
+      username = username,
+      description = description,
+    )
+
     username = request.form["username"]
     email = request.form["email"]
     description = request.form["description"]
@@ -67,6 +76,13 @@ def contact_complete():
     return redirect(url_for("contact_complete"))
 
   return render_template("contact_complete.html")
+
+def send_email(to,subject,template,**kwargs):
+  """メールを送信する関数"""
+  msg = Message(subject,recipients=[to])
+  msg.body = render_template(template + ".txt", **kwargs)
+  msg.html = render_template(template + ".html", **kwargs)
+  mail.send(msg)
 
 #with app.test_request_context():
   print(url_for("index"))
