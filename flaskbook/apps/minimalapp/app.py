@@ -1,4 +1,5 @@
 from email.message import Message
+from urllib import response
 from email_validator import validate_email, EmailNotValidError
 
 from flask import (
@@ -10,6 +11,8 @@ from flask import (
   request, 
   url_for, 
   flash,
+  make_response,
+  session,
 )
 
 import logging
@@ -49,25 +52,34 @@ def show_name(name):
 
 @app.route("/contact")
 def contact():
+  response = make_response(render_template("contact.html"))
+
+  response.set_cookie("flaskbook key","flaskbook value")
+
+  session["username"] = "ichiro"
+
+  return response
+
   return render_template("contact.html")
 
 @app.route("/contact/complete",methods=["GET","POST"])
 def contact_complete():
   if request.method == "POST":
 
-    send_email(
-      email,
-      "問い合わせありがとうございました",
-      "contact_mail"
-      username = username,
-      description = description,
-    )
-
+    
     username = request.form["username"]
     email = request.form["email"]
     description = request.form["description"]
 
     is_valid = True
+
+    send_email(
+      email,
+      "問い合わせありがとうございました",
+      "contact_mail",
+      username = username,
+      description = description,
+    )
 
     if not username:
       flash("ユーザー名は必須です")
